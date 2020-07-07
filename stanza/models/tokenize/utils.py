@@ -56,12 +56,14 @@ def process_sentence(sentence, mwt_dict=None):
             i += 1
     return sent
 
+SPACE_RE = re.compile(r'\s')
+
 def find_token(token, text):
     """
     Robustly finds the first occurrence of token in the text, and return its offset and its underlying original string.
     Ignores whitespace mismatches between the text and the token.
     """
-    m = re.search(r'\s*'.join([r'\s' if re.match(r'\s', x) else re.escape(x) for x in token]), text)
+    m = re.search(r'\s*'.join([r'\s' if SPACE_RE.match(x) else re.escape(x) for x in token]), text)
     return m.start(), m.group()
 
 def output_predictions(output_file, trainer, data_generator, vocab, mwt_dict, max_seqlen=1000, orig_text=None, no_ssplit=False):
