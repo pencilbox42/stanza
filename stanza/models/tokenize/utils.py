@@ -58,7 +58,7 @@ def process_sentence(sentence, mwt_dict=None):
 
 def find_token(token, text):
     """
-    Robustly finds the first occurrence of token in the text, and return its offset and it's underlying original string.
+    Robustly finds the first occurrence of token in the text, and return its offset and its underlying original string.
     Ignores whitespace mismatches between the text and the token.
     """
     m = re.search(r'\s*'.join([r'\s' if re.match(r'\s', x) else re.escape(x) for x in token]), text)
